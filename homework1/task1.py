@@ -13,14 +13,11 @@ def time_decorator(func):
     return wrapper
 
 @time_decorator
-def powNumbers(numbers, powed=2):
-    powedNumbers = []
-    for n in numbers:
-        powedNumbers.append(n ** powed)
-    return powedNumbers
-
-
-print(f'powedNumber[1, 2, 3]: {powNumbers([1, 2, 3], powed=3)}')
+def pow_numbers(numbers, powed=2):
+    powed_numbers = []
+    for number in numbers:
+        powed_numbers.append(number ** powed)
+    return powed_numbers
 
 class FilterType(Enum):
      ODD = 1
@@ -28,7 +25,7 @@ class FilterType(Enum):
      PRIME = 3
 
 
-def isPrime(n):
+def is_prime(n):
 
     if (n <= 1):
         return False
@@ -47,26 +44,28 @@ def isPrime(n):
     return True
 
 @time_decorator
-def filterNumbers(numbers, filterBy = FilterType.ODD):
+def filter_numbers(numbers, filter_by = FilterType.ODD):
 
-    if filterBy == FilterType.ODD:
-        def filterFunc(n):
+    if filter_by == FilterType.ODD:
+        def filter_func(n):
             if n % 2 != 0:
                 return n
-        return list(filter(filterFunc, numbers))
+        return list(filter(filter_func, numbers))
 
-    if filterBy == FilterType.EVEN:
-        def filterFunc(n):
+    if filter_by == FilterType.EVEN:
+        def filter_func(n):
             if n % 2 == 0:
                 return n
-        return list(filter(filterFunc, numbers))
+        return list(filter(filter_func, numbers))
 
-    if filterBy == FilterType.PRIME:
-        def filterFunc(n):
-            if isPrime(n):
+    if filter_by == FilterType.PRIME:
+        def filter_func(n):
+            if is_prime(n):
                 return n
-        return list(filter(filterFunc, numbers))
+        return list(filter(filter_func, numbers))
 
-print(f'filtered odd numbers from [1, 4, 5, 11, 15]: {filterNumbers([1, 4, 5, 11, 15], filterBy=FilterType.ODD)}')
-print(f'filtered even numbers from [1, 4, 5, 11, 15]: {filterNumbers([1, 4, 5, 11, 15], filterBy=FilterType.EVEN)}')
-print(f'filtered prime numbers from [1, 4, 5, 11, 15]: {filterNumbers([1, 4, 5, 11, 15], filterBy=FilterType.PRIME)}')
+if __name__ == '__main__':
+    print(f'powed_number[1, 2, 3]: {pow_numbers([1, 2, 3], powed=3)}')
+    print(f'filtered odd numbers from [1, 4, 5, 11, 15]: {filter_numbers([1, 4, 5, 11, 15], filter_by=FilterType.ODD)}')
+    print(f'filtered even numbers from [1, 4, 5, 11, 15]: {filter_numbers([1, 4, 5, 11, 15], filter_by=FilterType.EVEN)}')
+    print(f'filtered prime numbers from [1, 4, 5, 11, 15]: {filter_numbers([1, 4, 5, 11, 15], filter_by=FilterType.PRIME)}')
