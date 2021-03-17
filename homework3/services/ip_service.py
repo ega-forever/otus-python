@@ -1,6 +1,6 @@
 import aiohttp
 from dataclasses import dataclass
-
+import os
 
 @dataclass
 class IpResponse:
@@ -11,6 +11,8 @@ class IpResponse:
     lat: float
     lon: float
     query: str
+
+db = os.getenv("DB", "http://ip-api.com/json")
 
 
 async def fetch() -> IpResponse:
