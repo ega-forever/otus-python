@@ -30,7 +30,8 @@ def upgrade():
         Column('zip', String(32), unique=False),
         Column('lat', Float, unique=False),
         Column('lon', Float, unique=False),
-        Column('ip', String(32), unique=False)
+        Column('ip', String(32), unique=False),
+        Column('source', Integer, unique=False)
     )
 
 

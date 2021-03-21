@@ -10,23 +10,25 @@ load_dotenv()
 
 async def run_main():
     logger.info('fetching ip info...')
-    data = await ip_service.fetch()
-    logger.info('fetched info: {}'.format(data))
+    data = await asyncio.gather(ip_service.fetch_ip_api_com(), ip_service.fetch_ipapi_co())
 
-    session = Session()
-    ip = IP(
-        country=data.country,
-        region=data.region,
-        city=data.city,
-        zip=data.zip,
-        lat=data.lat,
-        lon=data.lon,
-        ip=data.query
-    )
-    session.add(ip)
-    session.commit()
-    session.close()
-    logger.info('saved to db: {}'.format(ip))
+    for item in data:
+        logger.info('fetched info: {}'.format(item))
+        session = Session()
+        ip = IP(
+            country=item.country,
+            region=item.region,
+            city=item.city,
+            zip=item.zip,
+            lat=item.lat,
+            lon=item.lon,
+            ip=item.ip,
+            source=item.source
+        )
+        session.add(ip)
+        session.commit()
+        session.close()
+        logger.info('saved to db: {}'.format(ip))
 
 
 if __name__ == "__main__":

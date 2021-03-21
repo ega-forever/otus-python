@@ -18,3 +18,4 @@ class IP(Base):
     lat = Column(Float, unique=False)
     lon = Column(Float, unique=False)
     ip = Column(String(32), unique=False)
+    source = Column(Integer, unique=False)
